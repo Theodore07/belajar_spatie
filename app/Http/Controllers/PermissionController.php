@@ -10,7 +10,7 @@ use App\Helpers\ResponseHelper;
 class PermissionController extends Controller
 {
     public function GetPermissions(){
-        $data = $this->GetAllData(Permission::class);
+        $data = $this->GetAllData(Permission::class);      
         return ResponseHelper::create_response($data, "Retrieved all available permissions", 200);
     }   
 

@@ -19,6 +19,8 @@ Route::middleware(['auth:api'], 'permission:view content|access content (api),ap
         Route::get('/GetUser', [UserController::class, "GetUser"]);
         Route::post('/FindUser', [UserController::class, "GetUserById"]);
         Route::get('/GetUserRole', [UserController::class, "GetUserRole"]);
+        Route::get('/GetDataOverview', [UserController::class, "GetDataOverview"]);
+        
 
         // Yang bisa dipake disini cuma yang guardnya API
         Route::middleware(['permission:customize user data|edit user (api)'])->group(function () {

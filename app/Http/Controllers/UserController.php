@@ -192,4 +192,23 @@ class UserController extends Controller
         return ResponseHelper::create_response($data, "List of Users with Roles and Permissions", 200);
     }
 
+    public function GetDataOverview(){
+        $users = User::with(['roles'])->get();
+        $data = $users->map(function($user){
+            
+            $rolePermissions = $user->roles->pluck('permissions')->map(function($permission){                  
+                return $permission->pluck('name');
+            });
+            return[
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'roles' => $user->roles->pluck('name'),
+                'direct_permissions' => $user->permissions->pluck('name'),
+                'role_permissions' => $rolePermissions  
+            ];
+        });
+        return ResponseHelper::create_response($data, "Data overview", 200);
+    }   
+
 }
